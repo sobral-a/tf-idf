@@ -1,6 +1,7 @@
 #!/usr/bin/env python3 
 import re
 import math
+import sys
 
 array = {}
 n = 0
@@ -46,12 +47,15 @@ def reverse(l):
     return [l.pop() for _ in range(len(l))]
 
 def start():
-    compute('test/text')
-    compute('test/text1')
+    args = sys.argv[1:]
+    if len(args) < 1:
+        print("You have to provide at least one text.")
+        return
+    for arg in sys.argv:
+        compute(arg)
     results = computeTFIDF()
     resultArray = sorted(results.items(), key=lambda x:x[1])
     resultArray = reverse(resultArray)
-    print(resultArray)
     for i in range (0, 10):
         print("{0} => {1}".format(resultArray[i][0], resultArray[i][1]))
 
