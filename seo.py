@@ -37,10 +37,22 @@ def computeTFIDF():
     results = {}
     for key, value in array.items():
         tf = float(value["occurences"] / maxOccurences)
-        idf = float((n / len(value["textes"])) + 1)
+        idf = float(math.log(n / len(value["textes"])) + 1)
         tfidf = tf * idf
         results[key] = tfidf
-    print(results)
-compute('test/text')
-compute('test/text1')
-computeTFIDF()
+    return results
+
+def reverse(l):
+    return [l.pop() for _ in range(len(l))]
+
+def start():
+    compute('test/text')
+    compute('test/text1')
+    results = computeTFIDF()
+    resultArray = sorted(results.items(), key=lambda x:x[1])
+    resultArray = reverse(resultArray)
+    print(resultArray)
+    for i in range (0, 10):
+        print("{0} => {1}".format(resultArray[i][0], resultArray[i][1]))
+
+start()
