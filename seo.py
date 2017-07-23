@@ -51,7 +51,7 @@ def start():
     if len(args) < 1:
         print("You have to provide at least one text.")
         return
-    for arg in sys.argv:
+    for arg in args:
         compute(arg)
     results = computeTFIDF()
     resultArray = sorted(results.items(), key=lambda x:x[1])
